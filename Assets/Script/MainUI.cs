@@ -11,7 +11,7 @@ public class MainUI : MonoBehaviour
     {
 
     }
-    public void onClickPlaye()
+    public void onClickPlay()
     {
         SceneManager.LoadScene("Stage1");
         

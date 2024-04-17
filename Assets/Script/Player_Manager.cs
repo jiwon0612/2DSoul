@@ -10,8 +10,12 @@ public class Player_Manager : MonoBehaviour
     private PlayerAttack PlayerAttac;
     [SerializeField]
     private RestartUI Restart;
-    
-    public int Hp = 6;
+    [SerializeField]
+    private Animator _anima;
+
+    private bool isHiting;
+
+    public float Hp = 100;
     
 
     private void Awake()
@@ -22,9 +26,14 @@ public class Player_Manager : MonoBehaviour
         }
         PlayerMove = GetComponent<PlayerMove>();
         PlayerAttac = GetComponent<PlayerAttack>();
+        _anima = GetComponent<Animator>();
         
     }
 
+    private void Start()
+    {
+        isHiting = true;
+    }
     private void Update()
     {
         //플레이어 이동
@@ -44,15 +53,18 @@ public class Player_Manager : MonoBehaviour
         }
         
         //플레이어 사망
-        if (Hp == 0)
+        if (Hp <= 0)
         {
-            Time.timeScale = 0;
             Restart.gameObject.SetActive(true);
         }
     }
 
-    public void Hit(int x)
+    public void Hit(float x)
     {
-        if (!PlayerMove._isDash) Hp -= x;
+        if (!PlayerMove._isDash && !isHiting) Hp -= x;
+        _anima.SetTrigger("isHit");
+        if (_anima.GetCurrentAnimatorStateInfo(1).IsName("Player_Hit")) ;
+        
     }
+    
 }

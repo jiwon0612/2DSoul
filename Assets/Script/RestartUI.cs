@@ -22,6 +22,7 @@ public class RestartUI : MonoBehaviour
     public void onClickRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        
     }
 
     public void onClickQuit()
@@ -35,8 +36,5 @@ public class RestartUI : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        
-    }
+    
 }

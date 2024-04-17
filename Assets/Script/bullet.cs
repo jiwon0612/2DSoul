@@ -9,7 +9,7 @@ public class bullet : MonoBehaviour
     public LayerMask isLaye;
     public float speed;
     [SerializeField]
-    private int Damge = 1;
+    private float Damge = 20;
 
     private Player_Manager target;
 

@@ -586,7 +586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.02248293, y: -0.00000001719085, z: -3.8659842e-10, w: 0.9997472}
+  m_LocalRotation: {x: -0.022482937, y: 0.000000017257998, z: 3.8810857e-10, w: 0.9997472}
   m_LocalPosition: {x: -4.64, y: 1.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -640,7 +640,7 @@ GameObject:
   - component: {fileID: 584221953}
   - component: {fileID: 584221955}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Hp_Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -689,9 +689,9 @@ MonoBehaviour:
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
-  m_FillMethod: 4
+  m_FillMethod: 0
   m_FillAmount: 1
-  m_FillClockwise: 1
+  m_FillClockwise: 0
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
@@ -715,14 +715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d12e2040715c4fd44a5dbf11a8d7a9c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hP_Bar:
-  - {fileID: 1923093469, guid: eaebc9ac1d9da874092e70869b3e45e0, type: 3}
-  - {fileID: 107215866, guid: eaebc9ac1d9da874092e70869b3e45e0, type: 3}
-  - {fileID: 1902200168, guid: d95aaa6ff41bb1545a08cdd5e877b5e5, type: 3}
-  - {fileID: 273656394, guid: eaebc9ac1d9da874092e70869b3e45e0, type: 3}
-  - {fileID: 785863028, guid: d95aaa6ff41bb1545a08cdd5e877b5e5, type: 3}
-  - {fileID: -288182778, guid: d95aaa6ff41bb1545a08cdd5e877b5e5, type: 3}
-  - {fileID: 282877165, guid: d95aaa6ff41bb1545a08cdd5e877b5e5, type: 3}
 --- !u!1 &590814552
 GameObject:
   m_ObjectHideFlags: 0
@@ -735,7 +727,6 @@ GameObject:
   - component: {fileID: 590814555}
   - component: {fileID: 590814554}
   - component: {fileID: 590814553}
-  - component: {fileID: 590814557}
   m_Layer: 5
   m_Name: PlayerUI
   m_TagString: Untagged
@@ -827,18 +818,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &590814557
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 590814552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8b75e48198b01c4f8795e744a3ff641, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1293,7 +1272,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 937493056}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.02248293, y: -0.00000001719085, z: -3.8659842e-10, w: 0.9997472}
+  m_LocalRotation: {x: -0.022482937, y: 0.000000017257998, z: 3.8810857e-10, w: 0.9997472}
   m_LocalPosition: {x: -4.64, y: 1.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1608,7 +1587,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Restart: {fileID: 1068833441}
-  Hp: 6
+  _anima: {fileID: 0}
+  Hp: 100
 --- !u!50 &1011324277
 Rigidbody2D:
   serializedVersion: 4
@@ -2054,7 +2034,7 @@ GameObject:
   - component: {fileID: 1307958792}
   - component: {fileID: 1307958791}
   m_Layer: 5
-  m_Name: Image
+  m_Name: HpUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

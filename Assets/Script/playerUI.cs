@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class playerUI : MonoBehaviour
 {
-    [SerializeField]
-    private Sprite[] hP_Bar = new Sprite[7];
+    
     private Image image;
 
-    private int Player_Hp;
+    private float Player_Hp;
 
     private void Awake()
     {
@@ -24,7 +23,7 @@ public class playerUI : MonoBehaviour
     private void Update()
     {
         Player_Hp = Player_Manager.instans.Hp;
-        image.sprite = hP_Bar[Player_Hp];
+        image.fillAmount = Player_Hp / 100;
 
     }
 }
