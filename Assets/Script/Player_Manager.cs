@@ -63,6 +63,7 @@ public class Player_Manager : MonoBehaviour
         if (Hp <= 0)
         {
             Restart.gameObject.SetActive(true);
+            Time.timeScale = 0;
 
         }
     }

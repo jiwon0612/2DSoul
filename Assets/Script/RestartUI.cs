@@ -10,19 +10,15 @@ public class RestartUI : MonoBehaviour
 
     private void Awake()
     {
-        PlayerManager = GetComponent<Player_Manager>();
+        //PlayerManager = GetComponent<Player_Manager>();
         gameObject.SetActive(false);
     }
 
-    private void Start()
-    {
-
-    }
 
     public void onClickRestart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+        Time.timeScale = 1;
     }
 
     public void onClickQuit()
