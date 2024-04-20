@@ -11,7 +11,7 @@ public class bullet : MonoBehaviour
     [SerializeField]
     private float Damge = 20;
 
-    private Player_Manager target;
+    //private Player_Manager target;
 
    
     private void Update()
