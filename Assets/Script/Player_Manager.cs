@@ -41,7 +41,7 @@ public class Player_Manager : MonoBehaviour
     {
         //플레이어 이동
         float x = Input.GetAxisRaw("Horizontal");
-        if (!isHiting)
+        if (!isHiting && !PlayerAttac._atking)
         {
             PlayerMove.Move(x);
 
@@ -65,6 +65,13 @@ public class Player_Manager : MonoBehaviour
             Restart.gameObject.SetActive(true);
             Time.timeScale = 0;
 
+        }
+
+        //플레이어 공격
+        if (Input.GetKeyDown(KeyCode.X) && !PlayerMove._isDash && !isHiting && x == 0)
+        {
+            PlayerAttac.Atk();
+            
         }
     }
 
