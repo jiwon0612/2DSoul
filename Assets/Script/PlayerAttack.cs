@@ -38,6 +38,10 @@ public class PlayerAttack : MonoBehaviour
         foreach (Collider2D collider in hit)
         {
             Debug.Log(collider.tag);
+            if(collider.tag == "Bullet")
+            {
+                Destroy(collider.gameObject);
+            }
         }
 
     }
