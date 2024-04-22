@@ -36,7 +36,10 @@ public class Player_Manager : MonoBehaviour
     {
         isHiting = false;
         _anima.SetBool("isHit", false);
+        Hp = 100;
+        
     }
+
     private void Update()
     {
         //플레이어 이동
@@ -63,8 +66,7 @@ public class Player_Manager : MonoBehaviour
         if (Hp <= 0)
         {
             Restart.gameObject.SetActive(true);
-            Time.timeScale = 0;
-
+            
         }
 
         //플레이어 공격

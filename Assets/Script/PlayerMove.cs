@@ -43,6 +43,7 @@ public class PlayerMove : MonoBehaviour
     {
         _isDash = false;
         _dashCool = false;
+        Debug.Log("t: "+Time.timeScale);
     }
     private void FixedUpdate()
     {

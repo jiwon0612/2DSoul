@@ -293,7 +293,7 @@ MonoBehaviour:
   atkDistance: 5
   bullet: {fileID: 9204608058788734964, guid: 85e07839162418d41bd9d0d2b493205b, type: 3}
   fire: {fileID: 415879986}
-  cooltime: 5
+  cooltime: 0.5
 --- !u!1 &395494958
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,11 +14,16 @@ public class RestartUI : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    private void OnEnable()
+    {
+        Time.timeScale = 0;
+    }
 
     public void onClickRestart()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    { 
         Time.timeScale = 1;
+        Debug.Log("restart:" + Time.timeScale);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     public void onClickQuit()
