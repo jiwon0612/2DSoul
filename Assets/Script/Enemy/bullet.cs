@@ -11,7 +11,7 @@ public class bullet : MonoBehaviour
     [SerializeField]
     private float Damge = 20;
 
-    //private Player_Manager target;
+    private Player_HP target;
 
    
     private void Update()
@@ -31,7 +31,8 @@ public class bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             //Debug.Log("dkvk");
-            Player_Manager.instans.Hit(Damge);
+            target = collision.GetComponent<Player_HP>();
+            target.Hit(Damge);
             DestroyBullet();
         }
         else if (!collision.gameObject.CompareTag("Enemy"))

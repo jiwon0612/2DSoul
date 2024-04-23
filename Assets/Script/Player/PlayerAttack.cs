@@ -11,8 +11,13 @@ public class PlayerAttack : MonoBehaviour
     public Transform pos;
     public Vector2 size;
 
+    private EnemyAI enemyHit;
+
     [SerializeField]
     private AnimationClip _clip;
+
+    [SerializeField]
+    private float damage;
 
     private void Awake()
     {
@@ -33,16 +38,7 @@ public class PlayerAttack : MonoBehaviour
         _atking = true;
         StartCoroutine(Atking());
 
-        Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0);
-
-        foreach (Collider2D collider in hit)
-        {
-            Debug.Log(collider.tag);
-            if(collider.tag == "Bullet")
-            {
-                Destroy(collider.gameObject);
-            }
-        }
+        StartCoroutine(cooltime());
 
     }
 
@@ -57,5 +53,25 @@ public class PlayerAttack : MonoBehaviour
         yield return new WaitForSecondsRealtime(_clip.length);
         _anim.SetBool("Atk", false);
         _atking = false;
+    }
+
+    IEnumerator cooltime()
+    {
+        yield return new WaitForSecondsRealtime(0.4f);
+        Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0);
+
+        foreach (Collider2D collider in hit)
+        {
+            Debug.Log(collider.tag);
+            if (collider.gameObject.CompareTag("Bullte"))
+            {
+                Destroy(collider.gameObject);
+            }
+            if (collider.gameObject.CompareTag("Enemy"))
+            {
+                enemyHit = collider.GetComponent<EnemyAI>();
+                enemyHit.isHit(damage);
+            }
+        }
     }
 }

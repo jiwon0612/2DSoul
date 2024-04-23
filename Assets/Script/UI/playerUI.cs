@@ -10,6 +10,9 @@ public class playerUI : MonoBehaviour
 
     private float Player_Hp;
 
+    [SerializeField]
+    private Player_HP hp;
+
     private void Awake()
     {
         image = GetComponent<Image>();
@@ -18,11 +21,11 @@ public class playerUI : MonoBehaviour
 
     private void Start()
     {
-       Player_Hp = Player_Manager.instans.Hp;
+       Player_Hp = hp.Hp;
 }
     private void Update()
     {
-        Player_Hp = Player_Manager.instans.Hp;
+        Player_Hp = hp.Hp;
         image.fillAmount = Player_Hp / 100;
 
     }

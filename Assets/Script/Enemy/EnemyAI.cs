@@ -16,6 +16,9 @@ public class EnemyAI : MonoBehaviour
     public float cooltime;
     private float currenttime;
 
+    [SerializeField]
+    private float hp;
+
     private SpriteRenderer sprite;
 
     private void Awake()
@@ -26,6 +29,13 @@ public class EnemyAI : MonoBehaviour
     private void Start()
     {
         currenttime = 0;
+    }
+    private void Update()
+    {
+        if (hp <= 0)
+        {
+            gameObject.SetActive(false);
+        }
     }
     private void FixedUpdate()
     {
@@ -77,5 +87,8 @@ public class EnemyAI : MonoBehaviour
             currenttime -= Time.deltaTime;
         }
     }
-
+    public void isHit(float x)
+    {
+        hp -= x;
+    }
 }

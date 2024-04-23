@@ -8,16 +8,16 @@ public class Player_Manager : MonoBehaviour
 
     public static Player_Manager instans = null;
 
-    private PlayerMove PlayerMove;
-    private PlayerAttack PlayerAttac;
-    [SerializeField]
-    private RestartUI Restart;
+    private PlayerMove move;
+    private PlayerAttack attack;
+    private Player_HP hp;
+    
     [SerializeField]
     private Animator _anima;
 
-    private bool isHiting;
+    
 
-    public float Hp = 100;
+    
 
 
     private void Awake()
@@ -26,17 +26,18 @@ public class Player_Manager : MonoBehaviour
         {
             instans = this;
         }
-        PlayerMove = GetComponent<PlayerMove>();
-        PlayerAttac = GetComponent<PlayerAttack>();
+        move = GetComponent<PlayerMove>();
+        attack = GetComponent<PlayerAttack>();
         _anima = GetComponent<Animator>();
+        hp = GetComponent<Player_HP>();
 
     }
 
     private void Start()
     {
-        isHiting = false;
+        
         _anima.SetBool("isHit", false);
-        Hp = 100;
+        
         
     }
 
@@ -44,58 +45,38 @@ public class Player_Manager : MonoBehaviour
     {
         //플레이어 이동
         float x = Input.GetAxisRaw("Horizontal");
-        if (!isHiting && !PlayerAttac._atking)
+        if (!hp.isHiting && !attack._atking)
         {
-            PlayerMove.Move(x);
+            move.Move(x);
 
         }
 
         //플레이어 점프
         if (Input.GetKeyDown(KeyCode.C))
         {
-            PlayerMove.Jump();
+            move.Jump();
         }
 
         //플레이어 대시
         if (Input.GetKeyDown(KeyCode.Z) && x != 0)
         {
-            PlayerMove.Dash1(x);
+            move.Dash1(x);
         }
 
         //플레이어 사망
-        if (Hp <= 0)
+        if (hp.Hp <= 0)
         {
-            Restart.gameObject.SetActive(true);
-            
+            hp.Death();
         }
 
         //플레이어 공격
-        if (Input.GetKeyDown(KeyCode.X) && !PlayerMove._isDash && !isHiting && x == 0)
+        if (Input.GetKeyDown(KeyCode.X) && !move._isDash && !hp.isHiting && x == 0)
         {
-            PlayerAttac.Atk();
+            attack.Atk();
             
         }
     }
 
-    public void Hit(float x)
-    {
-        if (!PlayerMove._isDash && !isHiting)
-        {
-            Hp -= x;
-            _anima.SetBool("isHit",true);
-            isHiting = true;
-            StartCoroutine(AnimatorHitCO());
-            
-
-        }
-
-    }
-
-    IEnumerator AnimatorHitCO()
-    {
-        yield return new WaitForSeconds(clip.length);
-        _anima.SetBool("isHit",false);
-        isHiting = false;
-    }
+    
 
 }

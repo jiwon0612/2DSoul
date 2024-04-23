@@ -6,11 +6,71 @@ public class Player_HP : MonoBehaviour
 {
     public float Hp; //체력
 
+    public bool isHiting;
+
+    private bool isDeath;
+
     [SerializeField] 
-    private AnimationClip clip; //죽는 모션
+    private AnimationClip deathClip; //죽는 모션
 
     [SerializeField] 
     private AnimationClip hitClip; // 맞는 모션
 
+    [SerializeField]
+    public GameObject reStart;
 
+    private Animator _anima;
+    private PlayerMove move;
+    private Player_Manager manager;
+    
+
+    private void Awake()
+    {
+        _anima = GetComponent<Animator>();
+        move = GetComponent<PlayerMove>();
+        manager = GetComponent<Player_Manager>();
+        
+    }
+
+    private void Start()
+    {
+        isHiting = false;
+        isDeath = false;
+    }
+
+    public void Death()
+    {
+        //Time.timeScale = 0;
+        isDeath = true;
+        _anima.SetBool("isDeath", true);
+        StartCoroutine(AnimaDeath());
+    }
+
+    public void Hit(float x)
+    {
+        if (!move._isDash && !isHiting && !isDeath)
+        {
+            Hp -= x;
+            _anima.SetBool("isHit", true);
+            isHiting = true;
+            StartCoroutine(AnimatorHitCO());
+            
+
+        }
+
+    }
+
+    IEnumerator AnimaDeath()
+    {
+        yield return new WaitForSecondsRealtime(deathClip.length);
+        _anima.SetBool("isDeath", false);
+        reStart.SetActive(true);
+    }
+    IEnumerator AnimatorHitCO()
+    {
+        yield return new WaitForSecondsRealtime(hitClip.length);
+        _anima.SetBool("isHit", false);
+        isHiting = false;
+    }
+    
 }
