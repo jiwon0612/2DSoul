@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Player_Manager : MonoBehaviour
 {
-    [SerializeField] private AnimationClip clip;
 
     public static Player_Manager instans = null;
 
@@ -14,6 +13,8 @@ public class Player_Manager : MonoBehaviour
     
     [SerializeField]
     private Animator _anima;
+
+    private bool isDeath;
 
     
 
@@ -28,15 +29,14 @@ public class Player_Manager : MonoBehaviour
         }
         move = GetComponent<PlayerMove>();
         attack = GetComponent<PlayerAttack>();
-        _anima = GetComponent<Animator>();
         hp = GetComponent<Player_HP>();
 
     }
 
     private void Start()
     {
+        isDeath = false;
         
-        _anima.SetBool("isHit", false);
         
         
     }
@@ -45,20 +45,21 @@ public class Player_Manager : MonoBehaviour
     {
         //플레이어 이동
         float x = Input.GetAxisRaw("Horizontal");
-        if (!hp.isHiting && !attack._atking)
+        if (!hp.isHiting && !attack._atking&& !isDeath)
         {
             move.Move(x);
 
         }
 
         //플레이어 점프
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.C) && !isDeath)
         {
+            
             move.Jump();
         }
 
         //플레이어 대시
-        if (Input.GetKeyDown(KeyCode.Z) && x != 0)
+        if (Input.GetKeyDown(KeyCode.Z) && x != 0 && !isDeath)
         {
             move.Dash1(x);
         }
@@ -66,11 +67,12 @@ public class Player_Manager : MonoBehaviour
         //플레이어 사망
         if (hp.Hp <= 0)
         {
+            isDeath = true;
             hp.Death();
         }
 
         //플레이어 공격
-        if (Input.GetKeyDown(KeyCode.X) && !move._isDash && !hp.isHiting && x == 0)
+        if (Input.GetKeyDown(KeyCode.X) && !move._isDash && !hp.isHiting && x == 0 && !isDeath && !attack._atking)
         {
             attack.Atk();
             

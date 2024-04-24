@@ -19,16 +19,15 @@ public class Player_HP : MonoBehaviour
     [SerializeField]
     public GameObject reStart;
 
-    private Animator _anima;
+    public Animator _anima;
     private PlayerMove move;
-    private Player_Manager manager;
+    
     
 
     private void Awake()
     {
-        _anima = GetComponent<Animator>();
         move = GetComponent<PlayerMove>();
-        manager = GetComponent<Player_Manager>();
+        
         
     }
 

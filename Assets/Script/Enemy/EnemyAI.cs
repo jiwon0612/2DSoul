@@ -16,79 +16,132 @@ public class EnemyAI : MonoBehaviour
     public float cooltime;
     private float currenttime;
 
+    private bool hiting;
+
+    [SerializeField]
+    private AnimationClip _hitClip;
+
+    [SerializeField]
+    private AnimationClip _deathClip;
+
     [SerializeField]
     private float hp;
+
+    private Animator _anima;
 
     private SpriteRenderer sprite;
 
     private void Awake()
     {
         sprite = GetComponent<SpriteRenderer>();
+        _anima = GetComponent<Animator>();
     }
 
     private void Start()
     {
         currenttime = 0;
+        hiting = false;
+        
     }
     private void Update()
     {
         if (hp <= 0)
         {
-            gameObject.SetActive(false);
+            Death();
         }
     }
     private void FixedUpdate()
     {
-        RaycastHit2D raycast = Physics2D.Raycast(transform.position,transform.right * -1,distance,isLaye);
-        if (raycast.collider != null)
+        if (!hiting)
         {
-            sprite.flipX = true;
-            if (Vector2.Distance(transform.position, raycast.collider.transform.position) < atkDistance)
+            RaycastHit2D raycast = Physics2D.Raycast(transform.position, transform.right * -1, distance, isLaye);
+            if (raycast.collider != null)
             {
-                if (currenttime <= 0)
+                sprite.flipX = true;
+                if (Vector2.Distance(transform.position, raycast.collider.transform.position) < atkDistance)
                 {
-                     GameObject bulletcopy = Instantiate(bullet, fire.transform.position,transform.rotation);
-                    if (bulletcopy.TryGetComponent<bullet>(out bullet _bullet))
+
+                    if (currenttime <= 0)
                     {
-                        _bullet.isLeft = false;
+                        _anima.SetBool("move", false);
+
+                        GameObject bulletcopy = Instantiate(bullet, fire.transform.position, transform.rotation);
+                        if (bulletcopy.TryGetComponent<bullet>(out bullet _bullet))
+                        {
+                            _bullet.isLeft = false;
+                        }
+
+                        currenttime = cooltime;
                     }
-
-                    currenttime = cooltime;
                 }
-            }
-            else
-            {
-                transform.position = Vector3.MoveTowards(transform.position, raycast.collider.transform.position, Time.deltaTime * speed);
-            }
-            currenttime -= Time.deltaTime;
-
-        }
-        RaycastHit2D raycast2 = Physics2D.Raycast(transform.position,transform.right,distance,isLaye);
-        if (raycast2.collider != null)
-        {
-            sprite.flipX = false;
-            if (Vector2.Distance(transform.position, raycast2.collider.transform.position) < atkDistance)
-            {
-                if (currenttime <= 0)
+                else
                 {
-                     GameObject bulletcopy = Instantiate(bullet, fire.transform.position,transform.rotation);
-                    if(bulletcopy.TryGetComponent<bullet>(out bullet _bullet))
-                    {
-                        _bullet.isLeft = true;
-                    }
-
-                    currenttime = cooltime;
+                    transform.position = Vector3.MoveTowards(transform.position, raycast.collider.transform.position, Time.deltaTime * speed);
+                    _anima.SetBool("move", raycast);
                 }
+                currenttime -= Time.deltaTime;
+
             }
-            else
+            RaycastHit2D raycast2 = Physics2D.Raycast(transform.position, transform.right, distance, isLaye);
+            if (raycast2.collider != null)
             {
-                transform.position = Vector3.MoveTowards(transform.position, raycast2.collider.transform.position, Time.deltaTime * speed);
+                sprite.flipX = false;
+                if (Vector2.Distance(transform.position, raycast2.collider.transform.position) < atkDistance)
+                {
+
+
+                    if (currenttime <= 0)
+                    {
+                        _anima.SetBool("move", false);
+
+                        GameObject bulletcopy = Instantiate(bullet, fire.transform.position, transform.rotation);
+                        if (bulletcopy.TryGetComponent<bullet>(out bullet _bullet))
+                        {
+                            _bullet.isLeft = true;
+                        }
+
+                        currenttime = cooltime;
+                    }
+                }
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, raycast2.collider.transform.position, Time.deltaTime * speed);
+                    _anima.SetBool("move", raycast2);
+
+                }
+                currenttime -= Time.deltaTime;
             }
-            currenttime -= Time.deltaTime;
         }
     }
     public void isHit(float x)
     {
-        hp -= x;
+        if (!hiting)
+        {
+            hp -= x;
+            hiting = true;
+            _anima.SetBool("Hit", true);
+            StartCoroutine(AnimaHit());
+        }
+    }
+
+    private void Death()
+    {
+        hiting = true;
+        _anima.SetBool("Death", true);
+        StartCoroutine(AnimaDeath());
+    }
+
+    IEnumerator AnimaDeath()
+    {
+        yield return new WaitForSecondsRealtime(_deathClip.length + 0.5f);
+        Destroy(gameObject);
+    }
+
+    IEnumerator AnimaHit()
+    {
+        yield return new WaitForSecondsRealtime(_hitClip.length);
+        hiting = false;
+        _anima.SetBool("Hit", false);
+
     }
 }

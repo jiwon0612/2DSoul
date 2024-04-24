@@ -4,36 +4,45 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private Animator _anim;
+    public Animator _anim;
 
     public bool _atking;
 
+    
+
     public Transform pos;
-    public Vector2 size;
+    public Vector3 size;
 
     private EnemyAI enemyHit;
 
     [SerializeField]
     private AnimationClip _clip;
+    [SerializeField]
+    private SpriteRenderer sprite;
 
     [SerializeField]
     private float damage;
 
     private void Awake()
     {
-        _anim = GetComponent<Animator>();
-
+       // _anim.GetComponentInChildren<Animator>();
     }
     private void Start()
     {
         _anim.SetBool("Atk", false);
         _atking = false;
+        
     }
 
-    
+    private void Update()
+    {
+        
+    }
+
 
     public void Atk()
     {
+        
         _anim.SetBool("Atk",true);
         _atking = true;
         StartCoroutine(Atking());
@@ -57,13 +66,13 @@ public class PlayerAttack : MonoBehaviour
 
     IEnumerator cooltime()
     {
-        yield return new WaitForSecondsRealtime(0.4f);
+        yield return new WaitForSecondsRealtime(0.2f);
         Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0);
 
         foreach (Collider2D collider in hit)
         {
-            Debug.Log(collider.tag);
-            if (collider.gameObject.CompareTag("Bullte"))
+            
+            if (collider.gameObject.CompareTag("Bullet"))
             {
                 Destroy(collider.gameObject);
             }

@@ -36,7 +36,6 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
         collider2D = GetComponent<CapsuleCollider2D>();
-        _anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -66,11 +65,22 @@ public class PlayerMove : MonoBehaviour
     }
     public void Move(float x)
     {
+        
         if (!_isDash)
         {
             rigid.velocity = new Vector2(x * speed, rigid.velocity.y);
             _anim.SetFloat("speed", Mathf.Abs(x));
-            if (x != 0) sprite.flipX = x < 0;
+            if (x != 0)
+            {
+                if (x<0)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else if (x > 0)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
+            }
 
         }
 
@@ -78,6 +88,7 @@ public class PlayerMove : MonoBehaviour
 
     public void Jump()
     {
+        
         //if (isGround == true)
         if (JumpCount > 0 && !_isDash)
         {
