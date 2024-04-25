@@ -33,8 +33,8 @@ public class EnemyAI : MonoBehaviour
 
     private void Awake()
     {
-        sprite = GetComponent<SpriteRenderer>();
-        _anima = GetComponent<Animator>();
+        sprite = GetComponentInChildren<SpriteRenderer>();
+        _anima = GetComponentInChildren<Animator>();
     }
 
     private void Start()
@@ -51,13 +51,13 @@ public class EnemyAI : MonoBehaviour
         }
     }
     private void FixedUpdate()
-    {
+    { 
         if (!hiting)
         {
             RaycastHit2D raycast = Physics2D.Raycast(transform.position, transform.right * -1, distance, isLaye);
             if (raycast.collider != null)
             {
-                sprite.flipX = true;
+                transform.localScale = new Vector3(-1, 1, 1);
                 if (Vector2.Distance(transform.position, raycast.collider.transform.position) < atkDistance)
                 {
 
@@ -85,7 +85,7 @@ public class EnemyAI : MonoBehaviour
             RaycastHit2D raycast2 = Physics2D.Raycast(transform.position, transform.right, distance, isLaye);
             if (raycast2.collider != null)
             {
-                sprite.flipX = false;
+                transform.localScale = new Vector3(1, 1, 1);
                 if (Vector2.Distance(transform.position, raycast2.collider.transform.position) < atkDistance)
                 {
 
