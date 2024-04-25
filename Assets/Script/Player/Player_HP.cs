@@ -21,12 +21,14 @@ public class Player_HP : MonoBehaviour
 
     public Animator _anima;
     private PlayerMove move;
-    
+
+    private Rigidbody2D rigid;
     
 
     private void Awake()
     {
         move = GetComponent<PlayerMove>();
+        rigid = GetComponent<Rigidbody2D>();
         
         
     }
@@ -39,6 +41,7 @@ public class Player_HP : MonoBehaviour
 
     public void Death()
     {
+        rigid.velocity = new Vector3(0, 0, 0);
         //Time.timeScale = 0;
         isDeath = true;
         _anima.SetBool("isDeath", true);
@@ -49,6 +52,7 @@ public class Player_HP : MonoBehaviour
     {
         if (!move._isDash && !isHiting && !isDeath)
         {
+            rigid.velocity = new Vector3(0, 0, 0);
             Hp -= x;
             _anima.SetBool("isHit", true);
             isHiting = true;

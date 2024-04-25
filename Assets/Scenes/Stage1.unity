@@ -1471,7 +1471,7 @@ MonoBehaviour:
   _anim: {fileID: 724982108}
   _atking: 0
   pos: {fileID: 1919363974}
-  size: {x: 0.74, y: 0.94, z: 0}
+  size: {x: 1.14, y: 0.94, z: 0}
   _clip: {fileID: 7400000, guid: 06d2352a9b83fbf449b81e894d8bf249, type: 2}
   sprite: {fileID: 724982109}
   damage: 40
@@ -2329,7 +2329,7 @@ Transform:
   m_GameObject: {fileID: 1919363973}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: -0.25, z: 0}
+  m_LocalPosition: {x: 1.02, y: -0.242, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

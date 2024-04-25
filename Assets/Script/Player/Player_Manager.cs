@@ -16,6 +16,7 @@ public class Player_Manager : MonoBehaviour
 
     private bool isDeath;
 
+    private float x;
     
 
     
@@ -44,7 +45,11 @@ public class Player_Manager : MonoBehaviour
     private void Update()
     {
         //플레이어 이동
-        float x = Input.GetAxisRaw("Horizontal");
+        if (hp.Hp > 0)
+        {
+            x = Input.GetAxisRaw("Horizontal");
+
+        }
         if (!hp.isHiting && !attack._atking&& !isDeath)
         {
             move.Move(x);

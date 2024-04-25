@@ -176,5 +176,5 @@ MonoBehaviour:
   isLaye:
     serializedVersion: 2
     m_Bits: 64
-  speed: 5
+  speed: 10
   Damge: 20
