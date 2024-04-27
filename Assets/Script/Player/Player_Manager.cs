@@ -10,6 +10,7 @@ public class Player_Manager : MonoBehaviour
     private PlayerMove move;
     private PlayerAttack attack;
     private Player_HP hp;
+    private PlayerASkill aSkill;
     
     [SerializeField]
     private Animator _anima;
@@ -31,7 +32,7 @@ public class Player_Manager : MonoBehaviour
         move = GetComponent<PlayerMove>();
         attack = GetComponent<PlayerAttack>();
         hp = GetComponent<Player_HP>();
-
+        aSkill = GetComponentInChildren<PlayerASkill>();
     }
 
     private void Start()
@@ -81,6 +82,12 @@ public class Player_Manager : MonoBehaviour
         {
             attack.Atk();
             
+        }
+
+        //플레이어 스킬
+        if (Input.GetKeyDown(KeyCode.A) && x!=0)
+        {
+            aSkill.Askill(x);
         }
     }
 
