@@ -45,6 +45,7 @@ public class Player_Manager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(x);
         //플레이어 이동
         if (hp.Hp > 0)
         {
@@ -85,7 +86,7 @@ public class Player_Manager : MonoBehaviour
         }
 
         //플레이어 스킬
-        if (Input.GetKeyDown(KeyCode.A) && x!=0)
+        if (Input.GetKeyDown(KeyCode.A))
         {
             aSkill.Askill(x);
         }

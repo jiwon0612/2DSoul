@@ -6,6 +6,7 @@ public class PlayerASkill : MonoBehaviour
 {
     private TrailRenderer Trail;
     private Rigidbody2D rigid;
+    private ParticleSystem particle;
     [SerializeField]
     private float _skillSpeed;
     [SerializeField]
@@ -17,11 +18,13 @@ public class PlayerASkill : MonoBehaviour
     {
         Trail = GetComponentInChildren<TrailRenderer>();
         rigid = GetComponentInParent<Rigidbody2D>();
-        
+        particle = GetComponentInChildren<ParticleSystem>();
     }
     private void Start()
     {
         isSkillCoolTime = false;
+        particle.Play(false);
+
     }
 
     public void Askill(float x)
@@ -30,8 +33,10 @@ public class PlayerASkill : MonoBehaviour
         {
             Trail.emitting = true;
             isSkillCoolTime = true;
-
-            rigid.AddForce(Vector2.right * x * _skillSpeed, ForceMode2D.Impulse);
+            particle.Play(true);
+            Debug.Log("¿€µø" + x);
+            rigid.AddForce(new Vector2(x * _skillSpeed, 1), ForceMode2D.Force);
+            //rigid.velocity = new Vector2(x * _skillSpeed, 0);
 
             StartCoroutine(SkillCoolTime());
         }
