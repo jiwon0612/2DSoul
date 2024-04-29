@@ -45,14 +45,13 @@ public class Player_Manager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(x);
         //플레이어 이동
         if (hp.Hp > 0)
         {
             x = Input.GetAxisRaw("Horizontal");
 
         }
-        if (!hp.isHiting && !attack._atking&& !isDeath)
+        if (!hp.isHiting && !attack._atking&& !isDeath && !aSkill.isOnSkill)
         {
             move.Move(x);
 
@@ -66,7 +65,7 @@ public class Player_Manager : MonoBehaviour
         }
 
         //플레이어 대시
-        if (Input.GetKeyDown(KeyCode.Z) && x != 0 && !isDeath)
+        if (Input.GetKeyDown(KeyCode.Z) && x != 0 && !isDeath && !aSkill.isOnSkill)
         {
             move.Dash1(x);
         }

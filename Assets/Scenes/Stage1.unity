@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &206880709 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 688732258500497952, guid: 6bf976076994c1d45b0449bc70e17158, type: 3}
+  m_PrefabInstance: {fileID: 5431710179148462343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &395494958
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,8 +207,8 @@ Transform:
   m_GameObject: {fileID: 395494958}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12, y: -1.98, z: 0}
-  m_LocalScale: {x: 15.838, y: 1, z: 1}
+  m_LocalPosition: {x: 10.2165, y: -1.98, z: 0}
+  m_LocalScale: {x: 38.59087, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -471,9 +476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f049451ba3d43c44aefdf7c29d69aa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _skillSpeed: 100
-  skillCoolTime: 5
+  _skillSpeed: 20
+  skillCoolTime: 1
   isSkillCoolTime: 0
+  isOnSkill: 0
 --- !u!1 &584221950
 GameObject:
   m_ObjectHideFlags: 0
@@ -1326,16 +1332,25 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.38461185
-        value: 0.34506768
-        inSlope: 0.000017821376
-        outSlope: 0.000017821376
+        time: 0.4369763
+        value: 0.25932503
+        inSlope: 2.2582624
+        outSlope: 2.2582624
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.40000203
-        outWeight: 0.3937063
+        inWeight: 0.21726514
+        outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.7784616
+        time: 0.52919453
+        value: 0.2423454
+        inSlope: -2.2160408
+        outSlope: -2.2160408
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.37655368
+        outWeight: 0.47300744
+      - serializedVersion: 3
+        time: 0.76039517
         value: 0
         inSlope: 0
         outSlope: 0
@@ -1448,7 +1463,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.5
-  m_PreviewTimeScale: 0
+  m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 0.5
@@ -2089,7 +2104,7 @@ Transform:
   m_GameObject: {fileID: 1206084955}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.7, y: 2.5, z: 0}
+  m_LocalPosition: {x: 31.75, y: 2.5, z: 0}
   m_LocalScale: {x: 1, y: 12.190006, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2210,7 +2225,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1304550608}
   serializedVersion: 8
-  lengthInSec: 0.1
+  lengthInSec: 0.2
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -3039,7 +3054,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 25
+      scalar: 40
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -3493,10 +3508,10 @@ ParticleSystem:
         ctime5: 0
         ctime6: 0
         ctime7: 0
-        atime0: 15420
+        atime0: 25443
         atime1: 27371
-        atime2: 41634
-        atime3: 49730
+        atime2: 45875
+        atime3: 48959
         atime4: 55898
         atime5: 0
         atime6: 0
@@ -5791,7 +5806,7 @@ ParticleSystem:
     enabled: 0
     serializedVersion: 4
     type: 0
-    collisionMode: 0
+    collisionMode: 1
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
@@ -5977,7 +5992,8 @@ ParticleSystem:
     exit: 0
     colliderQueryMode: 0
     radiusScale: 1
-    primitives: []
+    primitives:
+    - {fileID: 206880709}
   SubModule:
     serializedVersion: 2
     enabled: 0
@@ -7628,7 +7644,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2002115595555019963, guid: 6bf976076994c1d45b0449bc70e17158, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5899388748683820555, guid: 6bf976076994c1d45b0449bc70e17158, type: 3}
       propertyPath: m_FlipX

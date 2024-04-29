@@ -21,6 +21,7 @@ public class Player_HP : MonoBehaviour
 
     public Animator _anima;
     private PlayerMove move;
+    private PlayerASkill aSkill;
 
     private Rigidbody2D rigid;
     
@@ -29,7 +30,7 @@ public class Player_HP : MonoBehaviour
     {
         move = GetComponent<PlayerMove>();
         rigid = GetComponent<Rigidbody2D>();
-        
+        aSkill = GetComponentInChildren<PlayerASkill>();
         
     }
 
@@ -50,7 +51,7 @@ public class Player_HP : MonoBehaviour
 
     public void Hit(float x)
     {
-        if (!move._isDash && !isHiting && !isDeath)
+        if (!move._isDash && !isHiting && !isDeath &&!aSkill.isOnSkill)
         {
             rigid.velocity = new Vector3(0, 0, 0);
             Hp -= x;
