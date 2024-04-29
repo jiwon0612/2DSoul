@@ -456,7 +456,7 @@ Transform:
   m_GameObject: {fileID: 540394398}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -478,6 +478,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillSpeed: 20
   skillCoolTime: 1
+  enemy:
+    serializedVersion: 2
+    m_Bits: 128
+  not:
+    serializedVersion: 2
+    m_Bits: 0
   isSkillCoolTime: 0
   isOnSkill: 0
 --- !u!1 &584221950
@@ -5986,7 +5992,7 @@ ParticleSystem:
   TriggerModule:
     enabled: 1
     serializedVersion: 2
-    inside: 1
+    inside: 0
     outside: 0
     enter: 0
     exit: 0

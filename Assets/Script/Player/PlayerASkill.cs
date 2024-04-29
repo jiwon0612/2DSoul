@@ -7,11 +7,22 @@ public class PlayerASkill : MonoBehaviour
     private TrailRenderer Trail;
     private Rigidbody2D rigid;
     private ParticleSystem particle;
-    private CapsuleCollider2D collider;
+    private EnemyAI enemyHit;
+    private Collider2D item;
     [SerializeField]
     private float _skillSpeed;
     [SerializeField]
+    private float _skillDamage;
+    [SerializeField]
     private float skillCoolTime;
+    [SerializeField]
+    private LayerMask enemy;
+    [SerializeField]
+    private LayerMask not;
+    [SerializeField]
+    private Transform pos;
+    [SerializeField]
+    private Vector2 size;
 
     public bool isSkillCoolTime;
     public bool isOnSkill;
@@ -21,13 +32,14 @@ public class PlayerASkill : MonoBehaviour
         Trail = GetComponentInChildren<TrailRenderer>();
         rigid = GetComponentInParent<Rigidbody2D>();
         particle = GetComponentInChildren<ParticleSystem>();
-        collider = GetComponentInParent<CapsuleCollider2D>();
     }
     private void Start()
     {
         isSkillCoolTime = false;
 
     }
+
+
 
     public void Askill(float x)
     {
@@ -36,12 +48,41 @@ public class PlayerASkill : MonoBehaviour
             Trail.emitting = true;
             isSkillCoolTime = true;
             isOnSkill = true;
+            rigid.excludeLayers = enemy;
             particle.Play();
             rigid.gravityScale = 0;
             
             rigid.AddForce(new Vector2(x * _skillSpeed, 0), ForceMode2D.Impulse);
+            InvokeRepeating("OverLap", 0, 0.2f);
             StartCoroutine(SkillCoolTime());
         }
+    }
+
+    private void OverLap()
+    {
+        Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0);
+        foreach (Collider2D item in hit)
+        {
+            if (item.gameObject.CompareTag("Enemy"))
+            {
+                StartCoroutine(skilldamage());
+                enemyHit = item.GetComponent<EnemyAI>();
+                enemyHit.isHit(_skillDamage);
+            }
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(pos.position, size);
+    }
+
+    IEnumerator skilldamage()
+    {
+        yield return new WaitForSecondsRealtime(0.3f);
+        enemyHit = item.GetComponent<EnemyAI>();
+        enemyHit.isHit(_skillDamage);
     }
 
     IEnumerator SkillCoolTime()
@@ -51,6 +92,7 @@ public class PlayerASkill : MonoBehaviour
         Trail.emitting = false;
         rigid.gravityScale = 5;
         isOnSkill = false;
+        rigid.excludeLayers = not;
 
 
 
