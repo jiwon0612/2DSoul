@@ -13,8 +13,8 @@ public class PlayerASkill : MonoBehaviour
     private float _skillSpeed;
     [SerializeField]
     private float _skillDamage;
-    [SerializeField]
-    private float skillCoolTime;
+   
+    public float skillCoolTime;
     [SerializeField]
     private LayerMask enemy;
     [SerializeField]
@@ -23,9 +23,12 @@ public class PlayerASkill : MonoBehaviour
     private Transform pos;
     [SerializeField]
     private Vector2 size;
+   
 
     public bool isSkillCoolTime;
     public bool isOnSkill;
+
+    
 
     private void Awake()
     {
@@ -56,26 +59,21 @@ public class PlayerASkill : MonoBehaviour
 
             
 
-            InvokeRepeating("OverLap", 0, 0.2f);
+            InvokeRepeating("OverLap", 0, 0.5f);
             StartCoroutine(SkillCoolTime());
         }
     }
 
     private void OverLap()
     {
-        Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0);
+        Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0,enemy);
         foreach (Collider2D item in hit)
         {
-            if (item != null)
-            {
-                if (item.gameObject.CompareTag("Enemy"))
-                {
-                    enemyHit = item.GetComponent<EnemyAI>();
-                    StartCoroutine(skilldamage());
+            Debug.Log("æ∆¿’");
+            enemyHit = item.GetComponent<EnemyAI>();
+            StartCoroutine(skilldamage());
 
-                    //StartCoroutine(skilldamage());
-                }
-            }
+            //StartCoroutine(skilldamage());
         }
     }
 

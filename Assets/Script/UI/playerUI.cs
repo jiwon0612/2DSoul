@@ -7,26 +7,28 @@ public class playerUI : MonoBehaviour
 {
     
     private Image image;
+    private GameObject player;
 
     private float Player_Hp;
 
-    [SerializeField]
+    private PlayerASkill aSkill;
     private Player_HP hp;
 
     private void Awake()
     {
         image = GetComponent<Image>();
-        
+        player = GameObject.Find("Player");
+        aSkill = player.GetComponentInChildren<PlayerASkill>();
+        hp = player.GetComponent<Player_HP>();
     }
 
     private void Start()
     {
-       Player_Hp = hp.Hp;
+       //Player_Hp = hp.Hp;
 }
     private void Update()
     {
-        Player_Hp = hp.Hp;
-        image.fillAmount = Player_Hp / 100;
+        image.fillAmount = hp.Hp / 100;
 
     }
 }
