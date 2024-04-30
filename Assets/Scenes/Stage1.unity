@@ -460,6 +460,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1605342693}
   - {fileID: 952334261}
   - {fileID: 1304550609}
   m_Father: {fileID: 1011324274}
@@ -477,6 +478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillSpeed: 20
+  _skillDamage: 80
   skillCoolTime: 1
   enemy:
     serializedVersion: 2
@@ -484,6 +486,8 @@ MonoBehaviour:
   not:
     serializedVersion: 2
     m_Bits: 0
+  pos: {fileID: 1605342693}
+  size: {x: 1.6, y: 0.9}
   isSkillCoolTime: 0
   isOnSkill: 0
 --- !u!1 &584221950
@@ -5990,9 +5994,9 @@ ParticleSystem:
     collidesWithDynamic: 1
     interiorCollisions: 0
   TriggerModule:
-    enabled: 1
+    enabled: 0
     serializedVersion: 2
-    inside: 0
+    inside: 2
     outside: 0
     enter: 0
     exit: 0
@@ -7285,6 +7289,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1537234259}
   m_CullTransparentMesh: 1
+--- !u!1 &1605342692
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1605342693}
+  m_Layer: 6
+  m_Name: ASkillBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1605342693
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1605342692}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.22, y: -0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 540394399}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1714773715
 GameObject:
   m_ObjectHideFlags: 0
@@ -7370,7 +7405,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1919363974}
   m_Layer: 6
-  m_Name: box
+  m_Name: AttBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

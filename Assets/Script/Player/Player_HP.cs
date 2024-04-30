@@ -19,7 +19,7 @@ public class Player_HP : MonoBehaviour
     [SerializeField]
     public GameObject reStart;
 
-    public Animator _anima;
+    private Animator _anima;
     private PlayerMove move;
     private PlayerASkill aSkill;
 
@@ -28,6 +28,7 @@ public class Player_HP : MonoBehaviour
 
     private void Awake()
     {
+        _anima = GetComponentInChildren<Animator>();
         move = GetComponent<PlayerMove>();
         rigid = GetComponent<Rigidbody2D>();
         aSkill = GetComponentInChildren<PlayerASkill>();
@@ -43,7 +44,6 @@ public class Player_HP : MonoBehaviour
     public void Death()
     {
         rigid.velocity = new Vector3(0, 0, 0);
-        //Time.timeScale = 0;
         isDeath = true;
         _anima.SetBool("isDeath", true);
         StartCoroutine(AnimaDeath());

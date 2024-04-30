@@ -28,13 +28,14 @@ public class EnemyAI : MonoBehaviour
     private float hp;
 
     private Animator _anima;
-
     private SpriteRenderer sprite;
+    private Rigidbody2D rigid;
 
     private void Awake()
     {
         sprite = GetComponentInChildren<SpriteRenderer>();
         _anima = GetComponentInChildren<Animator>();
+        rigid = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -58,6 +59,7 @@ public class EnemyAI : MonoBehaviour
             if (raycast.collider != null)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
+                rigid.velocity = new Vector2(0, 0);
                 if (Vector2.Distance(transform.position, raycast.collider.transform.position) < atkDistance)
                 {
 
@@ -86,6 +88,8 @@ public class EnemyAI : MonoBehaviour
             if (raycast2.collider != null)
             {
                 transform.localScale = new Vector3(1, 1, 1);
+                rigid.velocity = new Vector2(0, 0);
+
                 if (Vector2.Distance(transform.position, raycast2.collider.transform.position) < atkDistance)
                 {
 

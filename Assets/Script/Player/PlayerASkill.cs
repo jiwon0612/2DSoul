@@ -53,6 +53,9 @@ public class PlayerASkill : MonoBehaviour
             rigid.gravityScale = 0;
             
             rigid.AddForce(new Vector2(x * _skillSpeed, 0), ForceMode2D.Impulse);
+
+            
+
             InvokeRepeating("OverLap", 0, 0.2f);
             StartCoroutine(SkillCoolTime());
         }
@@ -63,14 +66,28 @@ public class PlayerASkill : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0);
         foreach (Collider2D item in hit)
         {
-            if (item.gameObject.CompareTag("Enemy"))
+            if (item != null)
             {
-                StartCoroutine(skilldamage());
-                enemyHit = item.GetComponent<EnemyAI>();
-                enemyHit.isHit(_skillDamage);
+                if (item.gameObject.CompareTag("Enemy"))
+                {
+                    enemyHit = item.GetComponent<EnemyAI>();
+                    StartCoroutine(skilldamage());
+
+                    //StartCoroutine(skilldamage());
+                }
             }
         }
     }
+
+    //private void OnParticleCollision(GameObject other)
+    //{
+    //    Debug.Log("¾È³ç");
+    //    if (other.gameObject.CompareTag("Enemy"))
+    //    {
+    //        enemyHit = other.GetComponent<EnemyAI>();
+    //        enemyHit.isHit(_skillDamage);
+    //    }
+    //}
 
     private void OnDrawGizmos()
     {
@@ -80,8 +97,7 @@ public class PlayerASkill : MonoBehaviour
 
     IEnumerator skilldamage()
     {
-        yield return new WaitForSecondsRealtime(0.3f);
-        enemyHit = item.GetComponent<EnemyAI>();
+        yield return new WaitForSecondsRealtime(0.5f);
         enemyHit.isHit(_skillDamage);
     }
 
