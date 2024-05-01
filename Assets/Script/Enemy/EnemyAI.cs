@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
     {
         currenttime = 0;
         hiting = false;
-        
+        gameObject.SetActive(true);
     }
     private void Update()
     {
@@ -138,7 +138,8 @@ public class EnemyAI : MonoBehaviour
     IEnumerator AnimaDeath()
     {
         yield return new WaitForSecondsRealtime(_deathClip.length + 0.5f);
-        Destroy(gameObject);
+        //Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     IEnumerator AnimaHit()

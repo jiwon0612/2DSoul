@@ -564,7 +564,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   pos: {fileID: 1605342693}
-  size: {x: 1.15, y: 0.9}
+  size: {x: 0.8, y: 0.9}
   isSkillCoolTime: 0
   isOnSkill: 0
 --- !u!1 &584221950

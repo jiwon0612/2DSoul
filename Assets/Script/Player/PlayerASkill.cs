@@ -57,9 +57,8 @@ public class PlayerASkill : MonoBehaviour
             
             rigid.AddForce(new Vector2(x * _skillSpeed, 0), ForceMode2D.Impulse);
 
-            
 
-            InvokeRepeating("OverLap", 0, 0.5f);
+            InvokeRepeating("OverLap", 0, 0.01f);
             StartCoroutine(SkillCoolTime());
         }
     }
@@ -69,7 +68,6 @@ public class PlayerASkill : MonoBehaviour
         Collider2D[] hit = Physics2D.OverlapBoxAll(pos.position, size, 0,enemy);
         foreach (Collider2D item in hit)
         {
-            Debug.Log("æ∆¿’");
             enemyHit = item.GetComponent<EnemyAI>();
             StartCoroutine(skilldamage());
 
